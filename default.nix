@@ -1,9 +1,16 @@
 { pkgs ? import <nixpkgs> {} }:
 
+let
+  # Include the icon so it’s available in the build sandbox
+  icon = builtins.path { path = ./leafpad.png; };
+  desktopFile = builtins.path { path = ./leafpad.desktop; };
+in
+
 pkgs.stdenv.mkDerivation {
   pname = "leafpad";
   version = "0.8.17";
 
+  # Leafpad source tarball
   src = pkgs.fetchurl {
     url = "https://download-mirror.savannah.gnu.org/releases/leafpad/leafpad-0.8.17.tar.gz";
     sha256 = "jfjeeq6iYUgiW2EgYxtP5ridNtK1KWLnycwM4Hv9vUw=";
@@ -15,9 +22,6 @@ pkgs.stdenv.mkDerivation {
 
   buildInputs = [ pkgs.gtk2 ];
 
-  # Fix compiler errors: ignore format-security warnings
-  NIX_CFLAGS_COMPILE = "-Wno-format-security";
-
   configurePhase = ''
     ./autogen.sh || autoreconf -vi
     ./configure --prefix=$out
@@ -25,21 +29,20 @@ pkgs.stdenv.mkDerivation {
 
   buildPhase = "make";
 
-  # Install icon and .desktop file
   installPhase = ''
     make install
 
-    # Pixmaps for custom icon
+    # Install icon
     mkdir -p $out/share/pixmaps
-    cp leafpad.png $out/share/pixmaps/leafpad.png
+    cp ${icon} $out/share/pixmaps/leafpad.png
 
-    # Applications folder for desktop entry
+    # Install desktop file
     mkdir -p $out/share/applications
-    cp leafpad.desktop $out/share/applications/leafpad.desktop
+    cp ${desktopFile} $out/share/applications/
   '';
 
   meta = {
-    description = "Simple GTK text editor (Leafpad 0.8.17) with icon and desktop entry";
+    description = "Simple GTK text editor (from Savannah mirror)";
     license = pkgs.lib.licenses.gpl2;
   };
 }
