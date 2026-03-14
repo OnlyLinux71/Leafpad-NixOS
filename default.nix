@@ -10,21 +10,26 @@ pkgs.stdenv.mkDerivation {
   };
 
   nativeBuildInputs = [
-    pkgs.pkg-config pkgs.automake pkgs.autoconf pkgs.libtool pkgs.intltool
+    pkgs.pkg-config
+    pkgs.automake
+    pkgs.autoconf
+    pkgs.libtool
+    pkgs.intltool
   ];
 
-  buildInputs = [ pkgs.gtk2 ];
+  buildInputs = [
+    pkgs.gtk2
+  ];
 
-  # Configure with prefix
+  # Fix for modern GCC treating format-security warnings as errors
+  NIX_CFLAGS_COMPILE = "-Wno-error=format-security";
+
   configurePhase = ''
     ./autogen.sh || autoreconf -vi
     ./configure --prefix=$out
   '';
 
-  # Ignore format-security warnings
   buildPhase = ''
-    export CFLAGS="$CFLAGS -Wno-format-security"
-    export CXXFLAGS="$CXXFLAGS -Wno-format-security"
     make
   '';
 
@@ -35,6 +40,5 @@ pkgs.stdenv.mkDerivation {
   meta = {
     description = "Simple GTK text editor (from Savannah mirror)";
     license = pkgs.lib.licenses.gpl2;
-    homepage = "https://savannah.nongnu.org/projects/leafpad";
   };
 }
