@@ -19,6 +19,7 @@ nix-channel --update
 
 ## Build and Install
 # Clone the repository
+```bash
 git clone https://github.com/OnlyLinux71/Leafpad-NixOS.git
 cd Leafpad-NixOS
 
