@@ -28,23 +28,3 @@ nix-build
 # Install for your user (optional)
 sudo nix-env -i ./result
 
-###
-
-Development Shell (Optional)
-
-If you want to modify or rebuild Leafpad, enter a development shell with all build dependencies:
-
-nix-shell
-
-This provides:
-
-GTK2
-
-pkg-config
-
-autotools (autoconf, automake, libtool)
-
-intltool
-
-
-
