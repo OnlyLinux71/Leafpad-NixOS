@@ -14,15 +14,17 @@ Leafpad is licensed under GPL-2.0 (same as Leafpad).
 
 ## Build and Install
 
-git clone https://github.com/OnlyLinux71/Leafpad-NixOS.git  
-cd Leafpad-NixOS  
-nix-build  
-sudo nix-env -i ./result  
+```bash
+git clone https://github.com/OnlyLinux71/Leafpad-NixOS.git
+cd Leafpad-NixOS
+nix-build
+sudo nix-env -i ./result 
 
 ---
 
 ## Uninstall
 
-sudo nix-env -e leafpad  
+sudo nix-env -e leafpad
 
----
+
+
