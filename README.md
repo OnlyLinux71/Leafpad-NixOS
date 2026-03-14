@@ -21,12 +21,6 @@ cd Leafpad-NixOS
 nix-build  
 sudo nix-env -i ./result  
 
-After installation, run:
-
-leafpad  
-
-> If it doesn’t appear in your applications menu immediately, log out and back in, or restart your desktop environment.
-
 ---
 
 ## Uninstall
