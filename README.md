@@ -21,6 +21,6 @@ nix-build
 sudo nix-env -i ./result
 
 ```
-## uninstall
+## Uninstall
 ```bash
 sudo nix-env -e leafpad
