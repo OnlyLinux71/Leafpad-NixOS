@@ -15,11 +15,6 @@ Set up your nixpkgs channel if you haven’t already:
 ```bash
 nix-channel --add https://nixos.org/channels/nixpkgs-25.11 nixpkgs
 nix-channel --update
-
----
-
-## Clone and Build
-# Clone the repository
 ```bash
 git clone https://github.com/OnlyLinux71/Leafpad-NixOS.git
 cd Leafpad-NixOS
