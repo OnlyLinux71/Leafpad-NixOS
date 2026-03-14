@@ -30,6 +30,8 @@ sudo nix-env -e leafpad
 ```bash
 sudo nix-collect-garbage -d
 
+```
+
 ## Optional: Add Menu Icon and Desktop Entry
 
 If you want Leafpad to appear in your apps menu with an icon:
