@@ -6,7 +6,7 @@ pkgs.stdenv.mkDerivation {
 
   src = pkgs.fetchurl {
     url = "https://download-mirror.savannah.gnu.org/releases/leafpad/leafpad-0.8.17.tar.gz";
-    sha256 = "jfjeeq6iYUgiW2EgYxtP5ridNtK1KWLnycwM4Hv9vUw="; # working hash
+    sha256 = "jfjeeq6iYUgiW2EgYxtP5ridNtK1KWLnycwM4Hv9vUw=";
   };
 
   nativeBuildInputs = [
@@ -15,21 +15,8 @@ pkgs.stdenv.mkDerivation {
 
   buildInputs = [ pkgs.gtk2 ];
 
-  # Copy icon and .desktop file during install
-  installPhase = ''
-    make install
-
-    # Create directories in $out
-    mkdir -p $out/share/pixmaps
-    mkdir -p $out/share/applications
-
-    # Copy your custom icon (put leafpad.png in the repo)
-    cp leafpad.png $out/share/pixmaps/leafpad.png
-
-    # Copy the desktop file (put leafpad.desktop in the repo)
-    # Make sure Icon=$out/share/pixmaps/leafpad.png inside leafpad.desktop
-    cp leafpad.desktop $out/share/applications/leafpad.desktop
-  '';
+  # Fix compiler errors: ignore format-security warnings
+  NIX_CFLAGS_COMPILE = "-Wno-format-security";
 
   configurePhase = ''
     ./autogen.sh || autoreconf -vi
@@ -38,8 +25,21 @@ pkgs.stdenv.mkDerivation {
 
   buildPhase = "make";
 
+  # Install icon and .desktop file
+  installPhase = ''
+    make install
+
+    # Pixmaps for custom icon
+    mkdir -p $out/share/pixmaps
+    cp leafpad.png $out/share/pixmaps/leafpad.png
+
+    # Applications folder for desktop entry
+    mkdir -p $out/share/applications
+    cp leafpad.desktop $out/share/applications/leafpad.desktop
+  '';
+
   meta = {
-    description = "Simple GTK text editor (from Savannah mirror) with icon and desktop entry";
+    description = "Simple GTK text editor (Leafpad 0.8.17) with icon and desktop entry";
     license = pkgs.lib.licenses.gpl2;
   };
 }
