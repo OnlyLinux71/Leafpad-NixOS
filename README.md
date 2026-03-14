@@ -24,3 +24,5 @@ sudo nix-env -i ./result
 ## Uninstall
 
 sudo nix-env -e leafpad  
+
+---
