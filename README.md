@@ -54,7 +54,7 @@ wget https://raw.githubusercontent.com/OnlyLinux71/Leafpad-NixOS/main/leafpad.de
 
 # Update desktop file to use the new icon path
 ```bash
-sed -i 's|Icon=.*|Icon='$HOME'/.local/share/icons/leafpad.png|' ~/.local/share/applications/leafpad.desktop
+sed -i 's|Icon=.*|Icon='$HOME'/.local/share/icons/hicolor/256x256/apps/leafpad.png|' ~/.local/share/applications/leafpad.desktop
 
 ```
 
