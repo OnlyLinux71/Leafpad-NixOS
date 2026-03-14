@@ -28,8 +28,3 @@ sudo nix-env -i ./result
 To remove Leafpad:
 
 sudo nix-env -e leafpad  
-
-Optional: reclaim space from the Nix store:
-
-sudo nix-collect-garbage -d  
-
