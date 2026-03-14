@@ -5,13 +5,15 @@ Simple Nix expression to build and install Leafpad 0.8.17 on NixOS.
 ---
 ## Step 1: Clone & Build Leafpad
 
-```bash
 git clone https://github.com/OnlyLinux71/Leafpad-NixOS.git
 cd Leafpad-NixOS
 
 # Build and install Leafpad
 nix-build
 sudo nix-env -i ./result
+
+# Enter a Nix development shell for tinkering with Leafpad
+nix-shell
 
 ---
 ## License
