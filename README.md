@@ -14,13 +14,3 @@ git clone https://github.com/OnlyLinux71/Leafpad-NixOS.git
 cd Leafpad-NixOS
 nix-build
 sudo nix-env -i ./result
-
-<!-- Blank line ABOVE is required! -->
-
-## Uninstall
-
-Uninstall Leafpad:
-
-sudo nix-env -e leafpad
-
-
