@@ -6,8 +6,6 @@ License
 
 Leafpad-NixOS is licensed under GPL-2.0, same as the original Leafpad.
 
----
-
 ## Requirements
 
 - Nix installed: [https://nixos.org/download.html](https://nixos.org/download.html)
@@ -20,18 +18,14 @@ nix-channel --add https://nixos.org/channels/nixpkgs-25.11 nixpkgs
 nix-channel --update
 
 Build and Install
-
-Clone the repository:
-
+# Clone the repository
 git clone https://github.com/OnlyLinux71/Leafpad-NixOS.git
 cd Leafpad-NixOS
 
-Build Leafpad:
-
+# Build Leafpad
 nix-build
 
-Install for your user (optional):
-
+# Install for your user (optional)
 sudo nix-env -i ./result
 
 ###
