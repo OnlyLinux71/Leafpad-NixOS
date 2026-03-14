@@ -1,6 +1,7 @@
 { pkgs ? import <nixpkgs> {} }:
 
 let
+  # Make sure the icon and desktop file are included in the build
   icon = builtins.path { path = ./leafpad.png; };
   desktopFile = builtins.path { path = ./leafpad.desktop; };
 in
@@ -25,7 +26,7 @@ pkgs.stdenv.mkDerivation {
     ./configure --prefix=$out
   '';
 
-  # Disable the format-security error so it builds
+  # Disable format-security errors so it compiles on modern GCC
   buildPhase = ''
     export CFLAGS="$CFLAGS -Wno-format-security"
     make
@@ -33,8 +34,12 @@ pkgs.stdenv.mkDerivation {
 
   installPhase = ''
     make install
+
+    # Install icon
     mkdir -p $out/share/pixmaps
     cp ${icon} $out/share/pixmaps/leafpad.png
+
+    # Install desktop file
     mkdir -p $out/share/applications
     cp ${desktopFile} $out/share/applications/
   '';
