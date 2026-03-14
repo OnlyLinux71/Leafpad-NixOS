@@ -15,7 +15,7 @@ cd Leafpad-NixOS
 nix-build
 sudo nix-env -i ./result
 
----
+<!-- Blank line ABOVE is required! -->
 
 ## Uninstall
 
