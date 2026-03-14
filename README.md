@@ -14,9 +14,13 @@ cd Leafpad-NixOS
 nix-build
 sudo nix-env -i ./result
 
+---
+
 Step 2: Optional Development Shell
 # Enter a Nix development shell for building or tinkering with Leafpad
 nix-shell
+
+---
 
 License
 
