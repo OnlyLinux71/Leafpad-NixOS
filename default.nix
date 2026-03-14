@@ -1,7 +1,6 @@
 { pkgs ? import <nixpkgs> {} }:
 
 let
-  # Include the icon so it’s available in the build sandbox
   icon = builtins.path { path = ./leafpad.png; };
   desktopFile = builtins.path { path = ./leafpad.desktop; };
 in
@@ -10,7 +9,6 @@ pkgs.stdenv.mkDerivation {
   pname = "leafpad";
   version = "0.8.17";
 
-  # Leafpad source tarball
   src = pkgs.fetchurl {
     url = "https://download-mirror.savannah.gnu.org/releases/leafpad/leafpad-0.8.17.tar.gz";
     sha256 = "jfjeeq6iYUgiW2EgYxtP5ridNtK1KWLnycwM4Hv9vUw=";
@@ -27,16 +25,16 @@ pkgs.stdenv.mkDerivation {
     ./configure --prefix=$out
   '';
 
-  buildPhase = "make";
+  # Disable the format-security error so it builds
+  buildPhase = ''
+    export CFLAGS="$CFLAGS -Wno-format-security"
+    make
+  '';
 
   installPhase = ''
     make install
-
-    # Install icon
     mkdir -p $out/share/pixmaps
     cp ${icon} $out/share/pixmaps/leafpad.png
-
-    # Install desktop file
     mkdir -p $out/share/applications
     cp ${desktopFile} $out/share/applications/
   '';
