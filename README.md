@@ -38,15 +38,26 @@ If you want Leafpad to appear in your apps menu with an icon:
 
 ```bash
 # Download icon to your personal icons folder
-mkdir -p ~/.local/share/icons
-wget https://raw.githubusercontent.com/OnlyLinux71/Leafpad-NixOS/main/leafpad.png -O ~/.local/share/icons/leafpad.png
+mkdir -p ~/.local/share/icons/hicolor/256x256/apps
+wget https://raw.githubusercontent.com/OnlyLinux71/Leafpad-NixOS/main/leafpad.png \
+     -O ~/.local/share/icons/hicolor/256x256/apps/leafpad.png
+
+```
 
 # Download desktop entry
+```bash
 mkdir -p ~/.local/share/applications
-wget https://raw.githubusercontent.com/OnlyLinux71/Leafpad-NixOS/main/leafpad.desktop -O ~/.local/share/applications/leafpad.desktop
+wget https://raw.githubusercontent.com/OnlyLinux71/Leafpad-NixOS/main/leafpad.desktop \
+     -O ~/.local/share/applications/leafpad.desktop
+
+```
 
 # Update desktop file to use the new icon path
+```bash
 sed -i 's|Icon=.*|Icon='$HOME'/.local/share/icons/leafpad.png|' ~/.local/share/applications/leafpad.desktop
 
+```
+
 # Refresh the desktop menu
+```bash
 update-desktop-database ~/.local/share/applications
