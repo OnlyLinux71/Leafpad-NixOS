@@ -1,7 +1,5 @@
 # Leafpad-NixOS
 
-# Leafpad-NixOS
-
 Build and install Leafpad 0.8.17 on NixOS without using flakes.
 
 ## Installation
