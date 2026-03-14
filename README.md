@@ -20,6 +20,7 @@ cd Leafpad-NixOS
 nix-build
 sudo nix-env -i ./result
 
----
-
+```
+## uninstall
+```bash
 sudo nix-env -e leafpad
