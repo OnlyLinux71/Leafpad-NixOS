@@ -1,10 +1,5 @@
 { pkgs ? import <nixpkgs> {} }:
 
-let
-  icon = ./leafpad.png;
-  desktopFile = ./leafpad.desktop;
-in
-
 pkgs.stdenv.mkDerivation {
   pname = "leafpad";
   version = "0.8.17";
@@ -15,39 +10,31 @@ pkgs.stdenv.mkDerivation {
   };
 
   nativeBuildInputs = [
-    pkgs.pkg-config pkgs.automake pkgs.autoconf pkgs.libtool pkgs.intltool pkgs.patch
+    pkgs.pkg-config pkgs.automake pkgs.autoconf pkgs.libtool pkgs.intltool
   ];
 
   buildInputs = [ pkgs.gtk2 ];
 
+  # Configure with prefix
   configurePhase = ''
     ./autogen.sh || autoreconf -vi
     ./configure --prefix=$out
   '';
 
-  # Patch dialog.c to fix format-security errors
-  patchPhase = ''
-    substituteInPlace src/dialog.c \
-      --replace 'g_print(str);' 'g_print("%s", str);' \
-      --replace 'g_message(str);' 'g_message("%s", str);'
+  # Ignore format-security warnings
+  buildPhase = ''
+    export CFLAGS="$CFLAGS -Wno-format-security"
+    export CXXFLAGS="$CXXFLAGS -Wno-format-security"
+    make
   '';
-
-  buildPhase = "make";
 
   installPhase = ''
     make install
-
-    # Install icon
-    mkdir -p $out/share/pixmaps
-    cp ${icon} $out/share/pixmaps/leafpad.png
-
-    # Install desktop file
-    mkdir -p $out/share/applications
-    cp ${desktopFile} $out/share/applications/
   '';
 
   meta = {
     description = "Simple GTK text editor (from Savannah mirror)";
     license = pkgs.lib.licenses.gpl2;
+    homepage = "https://savannah.nongnu.org/projects/leafpad";
   };
 }
