@@ -1,1 +1,9 @@
-
+[Desktop Entry]
+Version=1.0
+Name=Leafpad
+Comment=Simple GTK text editor
+Exec=$out/bin/leafpad
+Icon=$out/share/pixmaps/leafpad.png
+Terminal=false
+Type=Application
+Categories=Utility;TextEditor;
