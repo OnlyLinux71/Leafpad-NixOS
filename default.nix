@@ -15,7 +15,7 @@ pkgs.stdenv.mkDerivation {
   };
 
   nativeBuildInputs = [
-    pkgs.pkg-config pkgs.automake pkgs.autoconf pkgs.libtool pkgs.intltool
+    pkgs.pkg-config pkgs.automake pkgs.autoconf pkgs.libtool pkgs.intltool pkgs.patch
   ];
 
   buildInputs = [ pkgs.gtk2 ];
@@ -25,12 +25,14 @@ pkgs.stdenv.mkDerivation {
     ./configure --prefix=$out
   '';
 
-  # Force GCC to ignore format-security errors
-  buildPhase = ''
-    export CFLAGS="$CFLAGS -Wno-format-security"
-    export CXXFLAGS="$CXXFLAGS -Wno-format-security"
-    make
+  # Patch dialog.c to fix format-security errors
+  patchPhase = ''
+    substituteInPlace src/dialog.c \
+      --replace 'g_print(str);' 'g_print("%s", str);' \
+      --replace 'g_message(str);' 'g_message("%s", str);'
   '';
+
+  buildPhase = "make";
 
   installPhase = ''
     make install
