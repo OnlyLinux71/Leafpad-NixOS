@@ -1,7 +1,10 @@
-# Leafpad-NixOS
+Leafpad-NixOS
 
-Leafpad 0.8.17 packaged for NixOS and Nix-enabled Linux systems.  
-This version works **without Nix flakes**, so it can be used on older or simpler Nix setups.
+A simple Nix package for Leafpad 0.8.17, compatible with NixOS and non-flake systems.
+
+License
+
+Leafpad-NixOS is licensed under GPL-2.0, same as the original Leafpad.
 
 ---
 
@@ -49,16 +52,5 @@ autotools (autoconf, automake, libtool)
 
 intltool
 
-License
-
-Leafpad-NixOS is licensed under GPL-2.0, same as the original Leafpad.
-
-Notes
-
-This repository is public and can be used on any NixOS or Nix-enabled Linux system.
-
-Works without flakes for maximum compatibility.
-
-The package is self-contained; no external overrides required.
 
 
