@@ -14,7 +14,7 @@ nix-build
 sudo nix-env -i ./result
 
 ---
-License
+## License
 GPL-2.0 (same as Leafpad)
 ---
 
