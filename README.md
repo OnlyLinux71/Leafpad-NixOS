@@ -15,9 +15,9 @@ nix-build
 sudo nix-env -i ./result
 
 Step 2: Optional Development Shell
-
 # Enter a Nix development shell for building or tinkering with Leafpad
 nix-shell
 
 License
+
 GPL-2.0 (same as Leafpad)
