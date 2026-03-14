@@ -24,3 +24,8 @@ sudo nix-env -i ./result
 ## Uninstall
 ```bash
 sudo nix-env -e leafpad
+
+```
+## Optional: Reclaim space from the Nix store:
+```bash
+sudo nix-collect-garbage -d
