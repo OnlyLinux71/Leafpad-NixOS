@@ -1,9 +1,8 @@
 { pkgs ? import <nixpkgs> {} }:
 
 let
-  # Make sure the icon and desktop file are included in the build
-  icon = builtins.path { path = ./leafpad.png; };
-  desktopFile = builtins.path { path = ./leafpad.desktop; };
+  icon = ./leafpad.png;
+  desktopFile = ./leafpad.desktop;
 in
 
 pkgs.stdenv.mkDerivation {
@@ -26,9 +25,10 @@ pkgs.stdenv.mkDerivation {
     ./configure --prefix=$out
   '';
 
-  # Disable format-security errors so it compiles on modern GCC
+  # Force GCC to ignore format-security errors
   buildPhase = ''
     export CFLAGS="$CFLAGS -Wno-format-security"
+    export CXXFLAGS="$CXXFLAGS -Wno-format-security"
     make
   '';
 
